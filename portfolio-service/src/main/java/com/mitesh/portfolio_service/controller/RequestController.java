@@ -1,20 +1,31 @@
 package com.mitesh.portfolio_service.controller;
 
+import com.mitesh.portfolio_service.model.User;
+import com.mitesh.portfolio_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RequestController {
 
-    @PostMapping("follow")
-    public void followcoin(String coinid){
+    /*We need to manage the duplications for followed coins
+    * use set with list as required*/
 
+    @Autowired
+    private UserService userService;
+    @PostMapping("newuser")
+    public String createNewUser(@RequestBody User user){
+        userService.createNewUser(user);
+        return "Success";
+    }
+
+    @PostMapping("follow")
+    public void followcoin(@RequestParam Integer userid, @RequestParam String coinid){
+        userService.followCoin(userid,coinid);
     }
     @PostMapping("unfollow")
-    public void unfollowcoin(String coinid){
-
+    public void unfollowcoin(@RequestParam Integer userid,@RequestParam String coinid){
+        userService.unFollowCoin(userid,coinid);
     }
     @PostMapping("buy")
     public void buy(String coinid){
