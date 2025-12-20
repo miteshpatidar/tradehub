@@ -15,6 +15,9 @@ public class RequestController {
 
     /*We need to manage the duplications for followed coins
     * use set with list as required */
+    /*we have to be synchronised so that multiple trades could be executed*/
+    /*next thing to do is to implement the websocket connection with another service
+    * than implement the services to act according the live data and perform transaction safely*/
 
     @Autowired
     private UserService userService;
@@ -67,7 +70,7 @@ public class RequestController {
         accountService.getHistory(userid,startDate,endDate);
     }
     @GetMapping("activetransaction")
-    public void getActiveTransaction(String userid){
+    public void getActiveTransaction(@RequestParam String userid){
         //return active transaction
         /*here also if we show the transaction live data than
         * we will need the websockets, but if here we avoid than
@@ -80,6 +83,13 @@ public class RequestController {
         accountService.getActiveTransactions();
 
     }
-//    @GetMapping("gettransaction")
-//    @PostMapping("closetransaction")
+    @GetMapping("gettransaction")
+    public void getTransaction(@RequestParam String userid,@RequestParam String transactionid){
+        /*this gets triggered when a user clicks on a transaction*/
+        accountService.getTransaction(userid,transactionid);
+    }
+    @PostMapping("closetransaction")
+    public void closeTransaction(@RequestParam String userid,@RequestParam String transactionid){
+        accountService.closeTransaction(userid,transactionid);
+    }
 }

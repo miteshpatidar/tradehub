@@ -16,4 +16,12 @@ public class AccountService {
     public void getActiveTransactions() {
         /*list all the active transactions*/
     }
+
+    public void getTransaction(String userid, String transactionid) {
+        /*return single transaction of id*/
+    }
+
+    public void closeTransaction(String userid, String transactionid) {
+        /*close the transaction and update the db status to closed*/
+    }
 }
