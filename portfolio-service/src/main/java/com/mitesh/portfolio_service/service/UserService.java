@@ -5,9 +5,7 @@ import com.mitesh.portfolio_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class UserService {
@@ -20,8 +18,8 @@ public class UserService {
     public void followCoin(Integer userid,String coinid) {
         Optional<User> user = userRepository.findById(userid);
         user.ifPresent(u->{
-            List<String> followedcoins = user.get().getFollowedcoins();
-            if(followedcoins==null) followedcoins = new ArrayList<>();
+            SortedSet<String> followedcoins = user.get().getFollowedcoins();
+            if(followedcoins==null) followedcoins = new TreeSet<>();
             followedcoins.add(coinid);
             user.get().setFollowedcoins(followedcoins);
             userRepository.save(user.get());
@@ -31,8 +29,8 @@ public class UserService {
     public void unFollowCoin(Integer userid, String coinid) {
         Optional<User> user = userRepository.findById(userid);
         user.ifPresent(u->{
-            List<String> followedcoins = user.get().getFollowedcoins();
-            if(followedcoins==null) followedcoins = new ArrayList<>();
+            SortedSet<String> followedcoins = user.get().getFollowedcoins();
+            if(followedcoins==null) followedcoins = new TreeSet<>();
             followedcoins.remove(coinid);
             user.get().setFollowedcoins(followedcoins);
             userRepository.save(user.get());

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 
 import java.util.List;
+import java.util.SortedSet;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ public class User {
     private int id;
     private String name;
     //private String password;
-    private List<String> followedcoins;
+    private SortedSet<String> followedcoins;
     @OneToOne
     private Account account;
 }

@@ -16,7 +16,7 @@ public class Account {
     private int id;
     @OneToOne
     private User user;
-    private double balance;
+    private double balance;   //current balance
     @OneToMany
-    private List<Transaction> transaction;
+    private List<Transaction> transaction;  //history
 }
