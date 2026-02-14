@@ -1,0 +1,10 @@
+Date 20/12/2025
+Till date we have worked with 2 services one is coindata service
+for fetching the live coin data from internet
+it was implemented using websockets, api calling, web clients
+with java + springboot
+in another service portfolio service is where we are implementing
+User
+Account
+Transactions
+Portfolio
